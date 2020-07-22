@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheesTravel</title>
+    <style>
+        body {text-align: center; font-family: Arial, Helvetica, sans-serif; background: rgb(31, 31, 32); color: white; min-width: 500px;}
+        #nid {width: 120px;}
+        #inputarea {background: rgb(51, 51, 53); margin: -8px -8px 0px -8px; padding: 40px;}
+        input {border-radius: 20px; padding: 10px; }
+        #nome {background: rgb(70, 70, 75); margin: -8px -8px 0px -8px; padding: 40px; text-shadow: 2px 2px 5px black;}
+        .nums {display: inline-block; background: rgb(31, 31, 32); padding: 5px;}
+        .letra {margin-left: -290px; background: rgb(31, 31, 32); display: inline-block; width: 27.8px; height: 23px; padding-top: 5px; position: relative; top: -224px;}
+        .num {display: inline-block; background: rgb(51, 51, 53); padding: 5px;}
+        #tabuleiro {background: rgb(84, 84, 92); margin: -8px -8px 0px -8px; padding: 40px; height: 260px;}
+    </style>
+</head>
+<h1 id="nome">CheesTravel Desafio</h1>
+<div id="tabuleiro">
+    <div class="nums">01</div><div class="nums">02</div><div class="nums">03</div><div class="nums">04</div><div class="nums">05</div><div class="nums">06</div><div class="nums">07</div><div class="nums">08</div><br>
+    <div class="num">01</div><div class="num">02</div><div class="num">03</div><div class="num">04</div><div class="num">05</div><div class="num">06</div><div class="num">07</div><div class="num">08</div><br><div class="num">09</div><div class="num">10</div><div class="num">11</div><div class="num">12</div><div class="num">13</div><div class="num">14</div><div class="num">15</div><div class="num">16</div><br><div class="num">17</div><div class="num">18</div><div class="num">19</div><div class="num">20</div><div class="num">21</div><div class="num">22</div><div class="num">23</div><div class="num">24</div><br><div class="num">25</div><div class="num">26</div><div class="num">27</div><div class="num">28</div><div class="num">29</div><div class="num">30</div><div class="num">31</div><div class="num">32</div><br><div class="num">33</div><div class="num">34</div><div class="num">35</div><div class="num">36</div><div class="num">37</div><div class="num">38</div><div class="num">39</div><div class="num">40</div><br><div class="num">41</div><div class="num">42</div><div class="num">43</div><div class="num">44</div><div class="num">45</div><div class="num">46</div><div class="num">47</div><div class="num">48</div><br><div class="num">49</div><div class="num">50</div><div class="num">51</div><div class="num">52</div><div class="num">53</div><div class="num">54</div><div class="num">55</div><div class="num">56</div><br><div class="num">57</div><div class="num">58</div><div class="num">59</div><div class="num">60</div><div class="num">61</div><div class="num">62</div><div class="num">63</div><div class="num">64</div><br>
+    <div class="letra">A</div><br><div class="letra">B</div><br><div class="letra">C</div><br><div class="letra">D</div><br><div class="letra">E</div><br><div class="letra">F</div><br><div class="letra">G</div><br><div class="letra">H</div>
+</div>
+<div id="inputarea">
+    <input type="number" name="n" id="nid" max="8" min="1" placeholder="Número (1 - 8)" onkeyup="verificarNumero()">
+    <input type="text" name="l" id="lid" placeholder="Letra (A - H)" onkeyup="verificarLetra()">
+    <input type="button" value="Checar Posição" onclick="check()">
+</div>
+<h1 id="res"></h1>
+<body>
+    <script>
+        let nEnter = document.getElementById('nid')
+        let lEnter = document.getElementById('lid')
+        function verificarNumero() {
+            if(nEnter.value == '1' || nEnter.value == '2' || nEnter.value == '3' || nEnter.value == '4' || nEnter.value == '5' || nEnter.value == '6' || nEnter.value == '7' || nEnter.value == '8') {
+
+            } else {nEnter.value = null}
+
+            if(nEnter.value.length > 1) {
+                nEnter.value = null
+            }
+        }
+
+        function verificarLetra() {
+            var uppercase = lEnter.value.toUpperCase()
+            if(uppercase == 'A' || uppercase == 'B' || uppercase == 'C' || uppercase == 'D' || uppercase == 'E' || uppercase == 'F' || uppercase == 'G' || uppercase == 'H') {
+
+            } else {lEnter.value = null}
+
+            if(lEnter.value.length > 1) {
+                lEnter.value = null
+            }
+        }
+
+        function check() {
+            var uppercase = lEnter.value.toUpperCase()
+            if(nEnter.value == 0 || lEnter.value == 0) {alert('Digite valores')} 
+            else {
+                if(uppercase == 'A') {var valorLetra = 0}; if(uppercase == 'B') {var valorLetra = 8}; if(uppercase == 'C') {var valorLetra = 16}; if(uppercase == 'D') {var valorLetra = 24}; if(uppercase == 'E') {var valorLetra = 32}; if(uppercase == 'F') {var valorLetra = 40}; if(uppercase == 'G') {var valorLetra = 48}; if(uppercase == 'H') {var valorLetra =56};
+                var  resultado = document.getElementById('res').innerHTML = Number(nEnter.value) + valorLetra
+            }
+
+            var elemento = document.querySelectorAll('.num')
+            for(let i = 0; i < elemento.length; i++){
+                elemento[i].style.background = 'rgb(51, 51, 53)';
+            }
+            document.getElementsByClassName('num')[resultado - 1].style.background = 'rgb(31, 31, 32)'
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinações Lotericas</title>
+</head>
+<body>
+    <h1></h1>
+    <div class="inputs">
+        <input type="number" name="quantia" id="quantia">
+        <input type="number" name="quantidade" id="quantidade">
+        <input type="number" name="posicao" id="posicao">
+        <input type="button" value="Gerar" onclick="gerar()">
+    </div>
+    <h2 id="res"></h2>
+    <script>
+        function gerar() {
+            var quantia = Number(document.querySelector('#quantia').value)
+            var quantidade = Number(document.querySelector('#quantidade').value)
+            var posicao = Number(document.querySelector('#posicao').value)
+            var res = document.querySelector('#res')
+            var contagem = 0
+            var num = posicao - 1
+            var nums = ' '
+            if(quantidade > quantia) {
+                return alert('O primeiro argumento não pode ser menor que o segundo!')
+            } else {
+                if(posicao < quantia - quantidade) {
+                    while(quantia > contagem && contagem < quantidade) {
+                        num ++
+                        nums += `${num} `
+                        contagem ++
+                    }
+                    res.innerHTML = nums
+                } else if(posicao == quantia - quantidade){
+                    var acaso = quantia - quantidade - 1
+                    while(quantia > contagem && contagem < quantidade) {
+                        acaso ++
+                        nums += `${acaso} `
+                        contagem ++
+                    }
+                    res.innerHTML = nums
+                } else {
+                    var acaso = quantia - quantidade
+                    while(quantia > contagem && contagem < quantidade) {
+                        acaso ++
+                        nums += `${acaso} `
+                        contagem ++
+                    }
+                    res.innerHTML = nums
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>

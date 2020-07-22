@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar senha</title>
+    <style>
+        body {
+            background-color: rgb(60, 60, 60);
+            color: whitesmoke;
+            font: normal 15pt Arial;
+            text-align: center;
+        }
+        input {
+            border-radius: 50px;
+            height: 50px;
+            width: 200px;
+            font-size: 25pt;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        input#vSenha {
+            width: 65px;
+            height: 50px;
+            position: relative;
+            background: url('olho.png') no-repeat;
+            background-position: center;
+            top: 14px;
+        }
+
+        div#saida {
+            background-color: whitesmoke;
+            border-radius: 50px;
+            width: 400px;
+            margin-top: 20px;
+            font-size: 20pt;
+            color: black;
+            font-weight: 900;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px;
+        }
+
+        p#erro {
+            color: red;
+            font-size: 12pt;
+        }
+
+        button {
+            background: none;
+            vertical-align: bottom;
+            border-radius: 50px;
+        }
+
+        svg {
+            zoom: 0.09;
+            
+        }
+    </style>
+</head>
+<body>
+    <h1>Verifique se sua senha é valida</h1>
+
+    <div id="entrada">
+        <button id="vSenha" onmousedown="mostraSenha()" onmouseup="escondeSenha()">
+            <svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+
+                <g>
+                 <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+                </g>
+                <g>
+                 <path fill="#ffffff" id="svg_3" d="m447.1,256.2c-45.3,-52.2 -107.9,-112.2 -191.1,-112.2c-33.6,0 -64.4,9.5 -96.9,29.8c-27.4,17.2 -55.5,41.4 -94.1,81.2l-1,1l6.7,6.9c55.1,56.4 102.7,105.1 185.3,105.1c36.5,0 71.9,-11.9 108.2,-36.4c30.9,-20.9 57.2,-47.4 78.3,-68.8l5.5,-5.5l-0.9,-1.1zm-191.1,-96.2c33.1,0 64.9,9.5 97.2,30.6c23.9,15.6 47.4,36.7 73.7,66.1c-38.3,38.7 -95.8,95.3 -170.9,95.3c-34.2,0 -64.2,-8.4 -94.2,-28.2c-27.5,-18.1 -52.3,-43.3 -76.2,-67.8c59.1,-59.7 108.4,-96 170.4,-96z"/>
+                 <path fill="#ffffff" id="svg_4" d="m256,336c44.1,0 80,-35.9 80,-80c0,-44.1 -35.9,-80 -80,-80c-44.1,0 -80,35.9 -80,80c0,44.1 35.9,80 80,80zm0,-143.7c35.2,0 64,28.6 64,63.7c0,35.1 -28.8,63.7 -64,63.7c-35.2,0 -63.9,-28.6 -63.9,-63.7c0,-35.1 28.7,-63.7 63.9,-63.7z"/>
+                 <path fill="#ffffff" id="svg_5" d="m288,256l0,0c0,17.5 -14.4,32 -31.8,32s-32.2,-15.2 -32.2,-32.7s15.8,-31.3 32,-31.3l0,-16c-26.5,0 -47.9,21.6 -47.9,48.2c0,26.6 21.5,48.1 47.9,48.1s48,-21.6 48,-48.1l0,-0.2l-16,0z"/>
+                </g>
+            </svg>
+        </button> 
+        <input type="password" name="senha" id="senha">
+        <input type="button" value="Verificar" onclick="verificar()">
+        <p id="erro"></p>
+    </div>
+
+    <div id="saida">
+    </div>
+
+    <script>
+        var senha = document.getElementById('senha')
+        var regex = /\W|_/
+        var space = /[ ]/
+        function verificar() {
+            if (senha.value.length > 5 && senha.value.length < 10) {
+                if (senha.value.indexOf('0') != -1 || senha.value.indexOf('1') != -1 || senha.value.indexOf('2') != -1 || senha.value.indexOf('3') != -1 || senha.value.indexOf('4') != -1 || senha.value.indexOf('5') != -1 || senha.value.indexOf('6') != -1 || senha.value.indexOf('7') != -1 || senha.value.indexOf('8') != -1 || senha.value.indexOf('9') != -1) {
+                    if (regex.test(senha.value) == true) {
+                        if (space.test(senha.value) == false) {
+                            document.getElementById('saida').innerHTML = 'Aprovada'
+                            document.getElementById('erro').innerHTML = ' '
+                        } else {
+                            document.getElementById('saida').innerHTML = 'Reprovada'
+                            document.getElementById('erro').innerHTML = 'Sua senha não pode conter espaços!'
+                        }
+                    } else {
+                        document.getElementById('saida').innerHTML = 'Reprovada'
+                        document.getElementById('erro').innerHTML = 'Sua senha deve conter pelo menos um caractere especial!'
+                    }
+                } else {
+                    document.getElementById('saida').innerHTML = 'Reprovada'
+                    document.getElementById('erro').innerHTML = 'Sua senha deve conter pelo menos um dígito de <b>0</b>-<b>9</b>!'
+                }
+            } else {
+                document.getElementById('saida').innerHTML = 'Reprovada'
+                document.getElementById('erro').innerHTML = 'Sua senha deve conter entre <b>5</b> e <b>10</b> caracteres!'
+            }
+        }
+
+        function mostraSenha() {
+            senha.type = 'text'
+        }
+
+        function escondeSenha() {
+            senha.type = 'password'
+        }
+    </script>
+</body>
+</html>
